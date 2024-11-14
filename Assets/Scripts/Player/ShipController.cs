@@ -6,10 +6,17 @@ public class ShipController : MonoBehaviour
 {
     public float moveSpeed = 5f;      // Speed of the ship
     public Transform shipTransform;   // Reference to the ship's transform
-    public InfinitSea sea;           // Reference to the InfiniteSea script
+    
 
     private Vector3 targetPosition;
     private bool isMoving = false;
+
+    [SerializeField]
+    private GameObject cannonballPrefab;
+    [SerializeField]
+    private Transform rightCannonSpawnPoint;
+    [SerializeField]
+    private Transform leftCannonSpawnPoint;
 
     void Start()
     {
@@ -28,7 +35,15 @@ public class ShipController : MonoBehaviour
         if (isMoving)
         {
             MoveShip();
-            sea.UpdateTilePositions();  // Update sea tiles around the player
+            
+        }
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            ShootLeft(leftCannonSpawnPoint);
+        }
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            ShootRight(rightCannonSpawnPoint);
         }
     }
 
@@ -63,5 +78,21 @@ public class ShipController : MonoBehaviour
             Quaternion lookRotation = Quaternion.LookRotation(direction);
             shipTransform.rotation = Quaternion.Slerp(shipTransform.rotation, lookRotation, Time.deltaTime * moveSpeed);
         }
+    }
+    void ShootRight(Transform cannonSpawnPoint)
+    {
+        // Top mermisini oluþtur ve ileri doðru ateþle
+        GameObject cannonball = Instantiate(cannonballPrefab, cannonSpawnPoint.position, cannonSpawnPoint.rotation);
+        Rigidbody rb = cannonball.GetComponent<Rigidbody>();
+        rb.velocity = cannonSpawnPoint.right * 20f; // Mermiyi ileri doðru fýrlatma hýzý
+
+    }
+    void ShootLeft(Transform cannonSpawnPoint)
+    {
+        // Top mermisini oluþtur ve ileri doðru ateþle
+        GameObject cannonball = Instantiate(cannonballPrefab, cannonSpawnPoint.position, cannonSpawnPoint.rotation);
+        Rigidbody rb = cannonball.GetComponent<Rigidbody>();
+        rb.velocity = cannonSpawnPoint.right * -20f; // Mermiyi ileri doðru fýrlatma hýzý
+
     }
 }

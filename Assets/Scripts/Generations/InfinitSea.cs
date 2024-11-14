@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class InfinitSea : MonoBehaviour
 {
-    public GameObject waterTilePrefab;  // Prefab of the water tile
-    public Transform player;            // Reference to the player's ship
-    public int gridSize = 3;            // Size of the grid (3x3 in this case)
-    public float tileSize = 50f;        // Size of each water tile
+    public GameObject waterTilePrefab;      // Deniz parçasý prefab'i
+    public Transform player;                // Oyuncunun transform'u
+    public int gridSize = 3;                // Grid boyutu (3x3)
+    public float tileSize = 50f;            // Her deniz parçasýnýn boyutu
 
-    private GameObject[,] waterTiles;
+    private GameObject[,] waterTiles;       // Deniz parçalarýnýn tutulduðu iki boyutlu dizi
+    private Vector2 playerGridPosition;     // Oyuncunun mevcut grid pozisyonu
 
     void Start()
     {
+        // Deniz parçalarýný grid'e yerleþtirme
         waterTiles = new GameObject[gridSize, gridSize];
-
-        // Initialize and position tiles around the player
         for (int x = 0; x < gridSize; x++)
         {
             for (int z = 0; z < gridSize; z++)
@@ -28,29 +28,43 @@ public class InfinitSea : MonoBehaviour
                 waterTiles[x, z] = Instantiate(waterTilePrefab, tilePosition, Quaternion.identity);
             }
         }
+
+        // Ýlk oyuncu pozisyonunu grid olarak ayarlama
+        playerGridPosition = new Vector2(
+            Mathf.FloorToInt(player.position.x / tileSize),
+            Mathf.FloorToInt(player.position.z / tileSize)
+        );
     }
 
     void Update()
     {
-        UpdateTilePositions();
+        UpdateOceanTiles();
     }
 
-    public void UpdateTilePositions()
+    void UpdateOceanTiles()
     {
-        // Calculate player's grid position
-        int playerGridX = Mathf.FloorToInt(player.position.x / tileSize);
-        int playerGridZ = Mathf.FloorToInt(player.position.z / tileSize);
+        // Oyuncunun yeni grid pozisyonunu hesaplama
+        Vector2 newGridPosition = new Vector2(
+            Mathf.FloorToInt(player.position.x / tileSize),
+            Mathf.FloorToInt(player.position.z / tileSize)
+        );
 
-        // Reposition tiles based on player movement
-        for (int x = 0; x < gridSize; x++)
+        // Oyuncu grid pozisyonunu deðiþtirirse deniz parçalarýný yenile
+        if (newGridPosition != playerGridPosition)
         {
-            for (int z = 0; z < gridSize; z++)
-            {
-                int tileX = playerGridX + x - gridSize / 2;
-                int tileZ = playerGridZ + z - gridSize / 2;
+            playerGridPosition = newGridPosition;
 
-                Vector3 newTilePosition = new Vector3(tileX * tileSize, 0, tileZ * tileSize);
-                waterTiles[x, z].transform.position = newTilePosition;
+            // Tüm deniz parçalarýný yeni pozisyonlara göre güncelle
+            for (int x = 0; x < gridSize; x++)
+            {
+                for (int z = 0; z < gridSize; z++)
+                {
+                    int tileX = (int)playerGridPosition.x + x - gridSize / 2;
+                    int tileZ = (int)playerGridPosition.y + z - gridSize / 2;
+
+                    Vector3 newTilePosition = new Vector3(tileX * tileSize, 0, tileZ * tileSize);
+                    waterTiles[x, z].transform.position = newTilePosition;
+                }
             }
         }
     }
