@@ -17,6 +17,8 @@ public class ShipController : MonoBehaviour
     private Transform rightCannonSpawnPoint;
     [SerializeField]
     private Transform leftCannonSpawnPoint;
+    [SerializeField]
+    private float cannonSpeed = 20f;
 
     void Start()
     {
@@ -84,7 +86,7 @@ public class ShipController : MonoBehaviour
         // Top mermisini oluþtur ve ileri doðru ateþle
         GameObject cannonball = Instantiate(cannonballPrefab, cannonSpawnPoint.position, cannonSpawnPoint.rotation);
         Rigidbody rb = cannonball.GetComponent<Rigidbody>();
-        rb.velocity = cannonSpawnPoint.right * 20f; // Mermiyi ileri doðru fýrlatma hýzý
+        rb.velocity = cannonSpawnPoint.right * cannonSpeed; // Mermiyi ileri doðru fýrlatma hýzý
 
     }
     void ShootLeft(Transform cannonSpawnPoint)
@@ -92,7 +94,7 @@ public class ShipController : MonoBehaviour
         // Top mermisini oluþtur ve ileri doðru ateþle
         GameObject cannonball = Instantiate(cannonballPrefab, cannonSpawnPoint.position, cannonSpawnPoint.rotation);
         Rigidbody rb = cannonball.GetComponent<Rigidbody>();
-        rb.velocity = cannonSpawnPoint.right * -20f; // Mermiyi ileri doðru fýrlatma hýzý
+        rb.velocity = cannonSpawnPoint.right * -cannonSpeed; // Mermiyi ileri doðru fýrlatma hýzý
 
     }
 }
