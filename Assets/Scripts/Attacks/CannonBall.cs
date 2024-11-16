@@ -35,7 +35,7 @@ public class CannonBall : MonoBehaviour
                 if (health.isPlayer)
                 {
                     health.TakeDamage(damage); // Düþmanýn verdiði hasarý uygula
-                    Debug.Log(health.currentHealth);
+                    
                 }
             }
             else
@@ -44,7 +44,7 @@ public class CannonBall : MonoBehaviour
                 if (!health.isPlayer)
                 {
                     health.TakeDamage(1); // Oyuncu mermisi her zaman 1 hasar verir
-                    Debug.Log(health.currentHealth);
+                    
                 }
             }
         }

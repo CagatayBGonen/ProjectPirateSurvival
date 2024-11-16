@@ -15,19 +15,22 @@ public class WaveManager : MonoBehaviour
 
     public List<Wave> waves; // Tüm dalgalarýn bilgisi
     public float timeBetweenWaves = 5f; // Dalgalar arasýnda bekleme süresi
+    private float timer;
     public GameObject enemyLevel1Prefab;
     public GameObject enemyLevel2Prefab;
     public GameObject enemyLevel3Prefab;
     //public Transform[] spawnPoints; // Düþmanlarýn spawn olacaðý noktalar
-    public float spawnInterval = 1f; // Düþmanlarýn spawn olma aralýðý (7. dalga için de kullanýlýr)
+    public float spawnInterval = 3f; // Düþmanlarýn spawn olma aralýðý (7. dalga için de kullanýlýr)
 
     private int currentWaveIndex = 0; // Hangi dalgada olduðumuzu takip eder
     private bool isFinalWave = false; // Son dalgada mýyýz?
     private int enemiesRemaining = 0; // Aktif düþman sayýsý
 
+    public GameManager gameManager;
     private void Start()
     {
        StartNextWave();
+        gameManager = GetComponent<GameManager>();
     }
 
     private void Update()
@@ -35,20 +38,24 @@ public class WaveManager : MonoBehaviour
         // Son dalga deðilse ve düþman kalmadýysa bir sonraki dalgayý baþlat
         if (!isFinalWave && enemiesRemaining <= 0)
         {
-            StartNextWave();
+            timer += Time.deltaTime;
+            if (timer > timeBetweenWaves)
+            {
+                StartNextWave();
+            }
         }
     }
 
     private void StartNextWave()
     {
-        Debug.Log($"Þu anki dalga: {currentWaveIndex}");
+        Debug.Log($"Þu anki index: {currentWaveIndex}");
         if (currentWaveIndex < waves.Count)
         {
             Wave wave = waves[currentWaveIndex];
 
             Debug.Log($"Wave {currentWaveIndex + 1}: {wave.waveName} baþlýyor!");
             //yield return new WaitForSeconds(timeBetweenWaves);
-
+            gameManager.OnNextWave();
             // Düþmanlarý spawn et
             StartCoroutine(SpawnEnemies(wave));
             
@@ -145,7 +152,9 @@ public class WaveManager : MonoBehaviour
 
     public void OnEnemyKilled()
     {
+        gameManager.OnEnemyDeath();
         // Düþman öldüðünde kalan düþman sayýsýný azalt
         enemiesRemaining--;
+        Debug.Log("Kalan Düþman Sayýsý:" + enemiesRemaining);
     }
 }

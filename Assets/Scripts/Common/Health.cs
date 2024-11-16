@@ -42,6 +42,7 @@ public class Health : MonoBehaviour
             {
                 WaveManager waveManager = FindObjectOfType<WaveManager>();
                 waveManager.OnEnemyKilled();
+                
             }
             // Düþman gemisi yok edilir
             Destroy(gameObject);
