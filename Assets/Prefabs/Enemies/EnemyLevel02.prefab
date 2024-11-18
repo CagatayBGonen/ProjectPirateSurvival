@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 9106826143580201101}
   - component: {fileID: 7835107872428149163}
   - component: {fileID: 8751420308951654156}
+  - component: {fileID: 8548890678370001494}
   m_Layer: 0
   m_Name: EnemyLevel02
   m_TagString: Enemy
@@ -70,10 +71,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 848a860c18874b642a2404fa56df76d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerTransform: {fileID: 0}
-  followDistance: 30
-  shootDistance: 50
-  moveSpeed: 17
+  followDistance: 70
+  shootDistance: 100
   fireRate: 2
   cannonballPrefab: {fileID: 6086532501656227339, guid: 03a0c02809012fc4cb874cd2b22c3d20, type: 3}
   cannonSpawnPoint: {fileID: 2410977992500835112}
@@ -94,6 +93,28 @@ MonoBehaviour:
   maxHealth: 2
   currentHealth: 0
   isPlayer: 0
+--- !u!195 &8548890678370001494
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1903186307201764805}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 18
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &6382564251163609590
 GameObject:
   m_ObjectHideFlags: 0

@@ -105,8 +105,8 @@ GameObject:
   - component: {fileID: 8582231312077481808}
   - component: {fileID: 7241016471950426719}
   - component: {fileID: 6657668355046654436}
-  - component: {fileID: 6343756095319942314}
   - component: {fileID: 2417731305948840292}
+  - component: {fileID: 4405613793302972758}
   m_Layer: 0
   m_Name: PlayerShip
   m_TagString: Player
@@ -166,39 +166,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 140b43a2b8c8298469af8a3ac6c0b6a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 20
-  shipTransform: {fileID: 8582231312077481808}
   cannonballPrefab: {fileID: 6086532501656227339, guid: 03a0c02809012fc4cb874cd2b22c3d20, type: 3}
   rightCannonSpawnPoint: {fileID: 4250163161385786874}
   leftCannonSpawnPoint: {fileID: 6584876289724063363}
   cannonSpeed: 50
---- !u!54 &6343756095319942314
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7673221130987054393}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 80
-  m_CollisionDetection: 0
 --- !u!114 &2417731305948840292
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -214,6 +185,28 @@ MonoBehaviour:
   maxHealth: 4
   currentHealth: 0
   isPlayer: 1
+--- !u!195 &4405613793302972758
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7673221130987054393}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 25
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1001 &648948324947473698
 PrefabInstance:
   m_ObjectHideFlags: 0

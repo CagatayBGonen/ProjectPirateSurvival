@@ -1,13 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyAi : MonoBehaviour
 {
-    public Transform playerTransform;                // Oyuncunun pozisyonunu almak için referans
+    private NavMeshAgent agent;
+
+    private Transform playerTransform;                // Oyuncunun pozisyonunu almak için referans
     public float followDistance = 10f;     // Takip mesafesi (düþman gemisi bu mesafeye geldiðinde durur)
     public float shootDistance = 30f;       // Ateþ etme mesafesi (düþman gemisi bu mesafeye geldiðinde ateþ eder)
-    public float moveSpeed = 5f;            // Düþman gemisinin hareket hýzý
+   /* public float moveSpeed = 5f;*/            // Düþman gemisinin hareket hýzý
     public float fireRate = 2f;             // Ateþ etme aralýðý (saniye)
     public GameObject cannonballPrefab;     // Ateþ edilecek mermi prefab’i
     public Transform cannonSpawnPoint;      // Top mermisinin spawn pozisyonu
@@ -20,6 +23,8 @@ public class EnemyAi : MonoBehaviour
 
     private void Start()
     {
+        agent = GetComponent<NavMeshAgent>();
+
         // Health bileþenini al
         health = GetComponent<Health>();
         // Oyuncuyu bul ve playerTransform'a ata
@@ -43,16 +48,22 @@ public class EnemyAi : MonoBehaviour
         float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
         Vector3 direction = (playerTransform.position - transform.position).normalized;
         // Eðer oyuncu takip mesafesindeyse onu takip et
-        if (distanceToPlayer > shootDistance)
+        if (distanceToPlayer > followDistance)
         {
+            agent.isStopped = false;
             FollowPlayer(direction);
-            RotateToPlayer(direction);
+
+        }
+        else
+        {
+            agent.isStopped = true;
         }
         // Eðer oyuncu ateþ etme mesafesindeyse ateþ et
         if (distanceToPlayer <= shootDistance)
         {
             TryShoot();
             RotateToPlayer(direction);
+            
         }
     }
 
@@ -61,7 +72,7 @@ public class EnemyAi : MonoBehaviour
         
         // Oyuncuya doðru hareket et
         
-        transform.position += direction * moveSpeed * Time.deltaTime;
+        agent.SetDestination(playerTransform.position);
 
         
     }
