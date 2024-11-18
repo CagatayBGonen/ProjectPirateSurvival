@@ -304,7 +304,7 @@ Transform:
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
   m_LocalRotation: {x: 0.5, y: 0, z: 0, w: 0.8660254}
-  m_LocalPosition: {x: 0, y: 21.05, z: -11.43}
+  m_LocalPosition: {x: 0, y: 100, z: -45.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -323,7 +323,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 1292974062}
-  offset: {x: 0, y: 21, z: -11.5}
+  offset: {x: 0, y: 100, z: -45.5}
 --- !u!1 &1103453878
 GameObject:
   m_ObjectHideFlags: 0
@@ -507,7 +507,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waterTilePrefab: {fileID: 6138680511401140523, guid: 250ecf18ad7d9854593c9c20c3ee39cd, type: 3}
   player: {fileID: 1292974062}
-  gridSize: 3
+  gridSize: 9
   tileSize: 100
 --- !u!4 &1464344195
 Transform:
@@ -837,7 +837,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8582231312077481808, guid: e6fbe9c2fc0c2424f95f3c61a04662a0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8582231312077481808, guid: e6fbe9c2fc0c2424f95f3c61a04662a0, type: 3}
       propertyPath: m_LocalPosition.z

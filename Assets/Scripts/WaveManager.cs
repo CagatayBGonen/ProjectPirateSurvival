@@ -132,7 +132,7 @@ public class WaveManager : MonoBehaviour
     }
     private Vector3 GetSpawnPosition(Vector3 playerPosition)
     {
-        float spawnDistance = Random.Range(20f, 50f); // Oyuncudan uzaklýk (20 - 50 birim)
+        float spawnDistance = Random.Range(200f, 300f); // Oyuncudan uzaklýk (20 - 50 birim)
         float spawnAngle = Random.Range(0f, 360f); // Rastgele bir açý
 
         // Spawn pozisyonunu polar koordinatlara göre hesaplayýn
